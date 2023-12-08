@@ -1,5 +1,6 @@
 package blackJack.domain;
 
+import blackJack.domain.card.Card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -7,7 +8,7 @@ import java.util.Objects;
 public class Player {
 
   private String name;
-  private List<String> cards = new ArrayList<>();
+  private List<Card> cards = new ArrayList<>();
 
   public Player(String name) {
     validateName(name);
@@ -24,11 +25,11 @@ public class Player {
     return this.name;
   }
 
-  public void giveInitCards(List<String> initCards) {
+  public void giveInitCards(List<Card> initCards) {
     this.cards.addAll(initCards);
   }
 
-  public List<String> getCards() {
+  public List<Card> getCards() {
     return this.cards;
   }
 

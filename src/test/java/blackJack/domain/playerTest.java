@@ -2,7 +2,9 @@ package blackJack.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
+import blackJack.domain.card.Card;
+import blackJack.domain.card.Rank;
+import blackJack.domain.card.Suit;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -18,11 +20,17 @@ public class playerTest {
   }
 
   @Test
-  @DisplayName("카드_가지게_하기")
-  void 카드_가지게_하기() {
+  @DisplayName("카드 두장 뽑기")
+  void 카드_두장_뽑기() {
+    //given
     Player player = new Player("John");
-    List<String> initialCards = Arrays.asList("3다이아몬드", "A클로버");
+    List<Card> initialCards = Arrays.asList(new Card(Rank.ACE, Suit.DIAMOND),
+        new Card(Rank.FOUR, Suit.CLOVER));
+
+    //when
     player.giveInitCards(initialCards);
+
+    //then
     assertEquals(initialCards, player.getCards());
   }
 }

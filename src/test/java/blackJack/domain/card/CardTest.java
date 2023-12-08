@@ -1,11 +1,12 @@
-package blackJack.domain;
+package blackJack.domain.card;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Arrays;
+import blackJack.domain.card.Card;
+import blackJack.domain.card.Rank;
+import blackJack.domain.card.Suit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import sun.font.TrueTypeFont;
 
 public class CardTest {
 

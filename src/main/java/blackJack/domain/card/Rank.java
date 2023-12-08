@@ -1,7 +1,7 @@
 package blackJack.domain.card;
 
 public enum Rank {
-  ACE("Ace", 1, 11),    // Ace는 1 또는 11점
+  ACE("Ace", 1),    // Ace는 1 또는 11점
   TWO("Two", 2),
   THREE("Three", 3),
   FOUR("Four", 4),
@@ -16,24 +16,19 @@ public enum Rank {
   KING("King", 10);
 
   private final String displayName;
-  private final int points1;  // 1로 사용할 때의 점수
-  private final int points11; // 11으로 사용할 때의 점수
+  private final int points;
+
 
   Rank(String displayName, int points) {
-    this(displayName, points, points);
-  }
-
-  Rank(String displayName, int points1, int points11) {
     this.displayName = displayName;
-    this.points1 = points1;
-    this.points11 = points11;
+    this.points = points;
   }
 
   public String getDisplayName() {
     return displayName;
   }
 
-  public int getPoints(boolean useAceAsTen) {
-    return useAceAsTen ? points11 : points1;
+  public int getPoints() {
+    return points;
   }
 }

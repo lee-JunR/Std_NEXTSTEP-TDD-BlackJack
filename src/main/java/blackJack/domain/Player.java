@@ -7,8 +7,10 @@ import java.util.Objects;
 
 public class Player {
 
+  public static final String DUPLICATED_CARDS_ERROR_MESSAGE = "중복된 카드를 핸드에 넣을 수 없습니다.";
+  public static final String INVALID_NAME_ERROR_MESSAGE = "형식에 맞지 않는 이름입니다.";
   private String name;
-  private List<Card> cards = new ArrayList<>();
+  private List<Card> hand = new ArrayList<>();
 
   public Player(String name) {
     validateName(name);
@@ -17,7 +19,7 @@ public class Player {
 
   private void validateName(String name) {
     if (name.isEmpty()) {
-      throw new IllegalArgumentException("형식에 맞지 않는 이름입니다.");
+      throw new IllegalArgumentException(INVALID_NAME_ERROR_MESSAGE);
     }
   }
 
@@ -25,17 +27,25 @@ public class Player {
     return this.name;
   }
 
-  public void giveCards(Card card) {
-    this.cards.add(card);
+  public void drawCard(Card card) { // 카드 한장 지급
+    hand.add(card);
+    validateCards(hand);
   }
 
-  public void giveCards(List<Card> initCards) {
-    this.cards.addAll(initCards);
+  // TODO : 생성자로 넣을까..?
+  public void drawInitialCards(List<Card> initCards) { // 카드 두장 지급
+    validateCards(initCards);
+    this.hand.addAll(initCards);
   }
 
+  private void validateCards(List<Card> hand) {
+    if (hand.size() != hand.stream().distinct().count()) {
+      throw new IllegalArgumentException(DUPLICATED_CARDS_ERROR_MESSAGE);
+    }
+  }
 
-  public List<Card> getCards() {
-    return this.cards;
+  public List<Card> getHand() {
+    return this.hand;
   }
 
   @Override
@@ -47,12 +57,12 @@ public class Player {
       return false;
     }
     Player player = (Player) o;
-    return Objects.equals(name, player.name) && Objects.equals(cards,
-        player.cards);
+    return Objects.equals(name, player.name) && Objects.equals(hand,
+        player.hand);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, cards);
+    return Objects.hash(name, hand);
   }
 }

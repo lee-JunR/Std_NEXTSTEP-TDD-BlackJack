@@ -25,9 +25,14 @@ public class Player {
     return this.name;
   }
 
-  public void giveInitCards(List<Card> initCards) {
+  public void giveCards(Card card) {
+    this.cards.add(card);
+  }
+
+  public void giveCards(List<Card> initCards) {
     this.cards.addAll(initCards);
   }
+
 
   public List<Card> getCards() {
     return this.cards;

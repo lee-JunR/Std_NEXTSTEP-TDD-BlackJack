@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+// TODO : Plater 클래스를 인터페이스로 생성하고 dealer 와 player 로 메소드 구분해서 넣는것도 고려할 것.
 public class Player {
 
   public static final String DUPLICATED_CARDS_ERROR_MESSAGE = "중복된 카드를 핸드에 넣을 수 없습니다.";
@@ -46,6 +47,13 @@ public class Player {
 
   public List<Card> getHand() {
     return this.hand;
+  }
+
+  public int getScore() {
+    int totalScore = hand.stream()
+        .mapToInt(Card::getPoint)
+        .sum();
+    return totalScore;
   }
 
   @Override

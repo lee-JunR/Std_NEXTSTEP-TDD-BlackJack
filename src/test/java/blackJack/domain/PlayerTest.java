@@ -68,7 +68,7 @@ public class PlayerTest {
     player.drawCard(new Card(Rank.ACE, Suit.SPADE));
 
     // then
-    assertEquals(cardSet, player.getHand());
+    Assertions.assertEquals(cardSet, player.getHand());
   }
 
   @Test
@@ -86,5 +86,20 @@ public class PlayerTest {
     // then
     Assertions.assertThrows(IllegalArgumentException.class, () -> player.drawCard(duplicatedCard));
 
+  }
+
+
+  @Test
+  @DisplayName("핸드_점수_반환")
+  void 핸드_점수_반환() {
+    // given
+    List<Card> cardSet = Arrays.asList(new Card(Rank.ACE, Suit.DIAMOND), new Card(Rank.FOUR, Suit.CLOVER), new Card(Rank.JACK, Suit.CLOVER));
+    player.drawInitialCards(cardSet);
+
+    // when
+    int handScore = player.getScore();
+
+    // then
+    Assertions.assertEquals(15, handScore);
   }
 }
